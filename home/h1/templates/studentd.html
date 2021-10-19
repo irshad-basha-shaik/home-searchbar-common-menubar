@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Registration Form{% endblock %}
+{% block content %}
+<div class="container" method="post" action="/saveform">
+  {% csrf_token %}
+  <div class="search" >
+    <form action="/action_page.php">
+      <input type="text" placeholder="Search.." name="search">
+      <button type="submit">Submit</button>
+    </form>
+
+  </div>
+  <h2>Employee Details:</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Name of Student</th>
+        <th>Father Name</th>
+        <th>Email</th>
+        <th>Contact</th>
+        <th>Gender</th>
+        <th>Date of Birth</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+      {% for form in form_list %}
+    <tbody>
+
+      <tr>
+        <td>{{form.name}}</td>
+        <td>{{form.fname}}</td>
+          <td>{{form.email}}</td>
+        <td>{{form.contact}}</td>
+        <td>{{form.gender}}</td>
+        <td>{{form.dob}} </td>
+        <td><button class="btn btn-default"><a href="/edit?id={{form.id}}">Edit</a></button></td>
+        <td><button class="btn btn-default"><a href="/delete?id={{form.id}}">Delete</a></button></td>
+      </tr>
+        {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock%}
